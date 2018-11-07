@@ -2,20 +2,25 @@ x <- c(0.22,1.64,5.06,0.24,1.96,6.41,0.29,2.27,7.58,0.29,2.44,7.81,0.33,2.75,8.0
 
 expQQplot <- function(x) {
   e=length(x)
-  plot(sort(x)[1:e],log(1-seq(1:e)/(e+1)),ylim=c(-2.5,0.1), main="Q-Q Plot for exp law")
-  abline(v=0)
+  #plot(sort(x)[1:e],log(1-seq(1:e)/(e+1)),ylim=c(-2.5,0.1), main="Q-Q Plot for exp law")
+  qqplot(qexp(ppoints(length(x))), x, main="Q-Q Plot for exponential law", xlab = "Theoritical quantities", ylab = "Sample quantities");
+  qqline(x, distribution = qexp, col="red");  abline(v=0)
   abline(h=0)
 }
 
 normQQplot <- function(x) {
   e=length(x)
-  plot(sort(x)[1:e], qnorm(seq(1:e)/(e+1)), main="Q-Q Plot for normal law")
+  #plot(sort(x)[1:e], qnorm(seq(1:e)/(e+1)), main="Q-Q Plot for normal law")
+  qqplot(qnorm(ppoints(length(x))), x, main="Q-Q Plot for normal law", xlab = "Theoritical quantities", ylab = "Sample quantities");
+  qqline(x, distribution = qnorm, col="red");
   abline(h=0)
 }
 
 uniQQplot <- function(x) {
   e=length(x)
-  plot(sort(x)[1:e], qunif(seq(1:e)/(e+1)), main="Q-Q Plot for uni law")
+  #plot(sort(x)[1:e], qunif(seq(1:e)/(e+1)), main="Q-Q Plot for uni law")
+  qqplot(qunif(ppoints(length(x))), x, main="Q-Q Plot for uniform law", xlab = "Theoritical quantities", ylab = "Sample quantities")
+  qqline(x, distribution = qunif, col="red") 
   abline(v=0)
   abline(h=0)
 }
@@ -37,7 +42,6 @@ afficheSameLarg <- function(x){
   segments(midl[1:mlon-1],densites[1: mlon-1],
            midl[2:mlon],densites[2:mlon],
            lwd=3)
-
 }
 
 afficheSameEffect <- function(x){
