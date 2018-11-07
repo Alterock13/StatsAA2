@@ -33,7 +33,7 @@ displayFixedWidth <- function(x) {
   hist = hist(x, prob=T, breaks=seq(a0,ak,h), xlim=c(a0,ak), main="Histogramme à largeur fixe")
   lines(hist$mids, hist$density, lwd=3, col="Red")
   lines(density(x), lwd=3, col="Blue")
-  plot(ecdf(x), main="Fonction de rÃ©partition empirique pour largeur fixée")
+  plot(ecdf(x), main="Fonction de répartition empirique pour largeur fixée")
 }
 
 displayFixedEffec <- function(x) {
@@ -128,4 +128,4 @@ main3 <- function(nIt) {
   cat("\nScore dispersion = ", scoreDispersion4)
 }
 
-main2()
+main3(100)
