@@ -1,0 +1,47 @@
+---
+title: "Examen 2019"
+author: "Arnaud Pierret"
+date: "13 mars 2019"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+Pour estimer une moyenne (théorique), on considère la moyenne empirique qui est un estimateur consistant et sans biais.
+
+Pour estimer une variance (théorique), on considère :
+
+de manière privilégiée, la variance empirique corrigée qui est un estimateur consistant et sans biais,
+
+## Including Plots
+```{r}
+x <- c(0.22,0.24,0.29,0.33,0.47,0.85,1.14,1.50,1.51,1.64,1.96,2.27,2.44,2.75,2.99,3.13,3.85,4.66,5.04,5.06,6.41,7.58,7.81,8.00,8.24,10.15,12.24,13.78,16.12)
+
+#Moyenne empirique
+moy <- mean(x)
+#
+lambda = 1/moy ## DEPEND DE LA LOI !!!
+
+
+simuExp <- function(nIt){
+  lambdaSim <- 0
+  #lambda <- 10
+  scoreDispersion <- 0
+  for(i in 1:nIt){
+    vect <- rexp(30, lambda)
+    lambdaSim <- 1/mean(vect) + lambdaSim
+    scoreDispersion <- scoreDispersion + abs(lambdaSim-lambda)
+  }
+  lambdaSim <- lambdaSim/nIt
+  cat("\nlambda calcule = ",lambda)
+  cat("\nlambda Simule = ",lambdaSim)
+  cat("\nbiais = ", ((lambdaSim/lambda)*100)-100, "%")
+  cat("\nScore dispersion = ", scoreDispersion)
+}
+simuExp(1000)
+
+```
